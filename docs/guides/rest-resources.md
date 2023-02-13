@@ -118,9 +118,10 @@ Here is an example for fetching more than one set of products from the API:
 ```ts
 do {
   const pageProducts = await shopify.rest.Product.all({
-    ...shopify.rest.Product.NEXT_PAGE_INFO?.query,
+    ...shopify.rest.Product.NEXT_PAGE_INFO?.query ?? {
+      status: 'active',
+    },
     session,
-    status: 'active',
   });
 
   // ... use pageProducts
